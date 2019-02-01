@@ -24,6 +24,7 @@
     },
     "require": {
         "php": "^7.1",
+        "michelf/php-markdown": "^1.8",
         "patrickschur/language-detection": "^3.4",
         "zendframework/zend-component-installer": "^2.1.1",
         "zendframework/zend-config-aggregator": "^1.0",

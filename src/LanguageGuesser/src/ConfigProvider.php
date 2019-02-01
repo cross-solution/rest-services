@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LanguageGuesser;
 
+use InputFilter\ResponseStrategy\JsonResponseStrategy;
 use LanguageGuesser\InputFilter\InputFilter;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -27,6 +28,9 @@ class ConfigProvider
             'templates'    => $this->getTemplates(),
             'input_filters' => $this->getInputFilters(),
             'input_filter_middleware' => $this->getInputFilterMiddlewareMap(),
+            'homepages' => [
+                'language-guesser::home',
+            ],
         ];
     }
 
@@ -73,7 +77,10 @@ class ConfigProvider
     public function getInputFilterMiddlewareMap()
     {
         return [
-            RoutesDelegatorFactory::POST_ROUTE_NAME => InputFilter::class
+            RoutesDelegatorFactory::POST_ROUTE_NAME => [
+                'name' => InputFilter::class,
+                'strategy' => [JsonResponseStrategy::class, 'one', 'two', 'three'],
+            ]
         ];
     }
 }

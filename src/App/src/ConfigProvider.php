@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App;
 
+use Zend\Expressive\Template\TemplateRendererInterface;
+
 /**
  * The configuration provider for the App module
  *
@@ -32,11 +34,15 @@ class ConfigProvider
     public function getDependencies() : array
     {
         return [
+            'aliases' => [
+                TemplateRendererInterface::class => Renderer\MarkdownRenderer::class,
+            ],
             'invokables' => [
                 Handler\PingHandler::class => Handler\PingHandler::class,
             ],
             'factories'  => [
                 Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
+                Renderer\MarkdownRenderer::class => Renderer\MarkdownRendererFactory::class,
             ],
         ];
     }
